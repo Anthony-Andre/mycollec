@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Ma Collection
+{% endblock %}
+
+{% block body %}
+
+	<h2>Bienvenue dans votre collection</h2>
+
+	<h3>Nombre de jeux dans votre collection :</h3>
+	{{listOfVideoGames|length}}
+	<h3>Nombre de consoles :</h3>
+	{{dump(consoles)}}
+	<h3>Liste de vos jeux :</h3>
+
+	<ul>
+		{% for video_game in listOfVideoGames %}
+
+			<li>{{video_game.name}}
+				({{video_game.console.name}})</li>
+
+		{% endfor %}
+	</ul>
+
+
+	<form id="filters">
+
+		{% for console in consoles%}
+
+			<p><input type="checkbox" name="consoles[]" id="cat{{console.id}}" value="{{console.id}}">
+				<label for="cat{{console.id}}">{{console.name}}</label>
+			</p>
+
+		{% endfor %}
+
+
+	</form>
+
+	<h3>Ajouter un jeu dans votre collection :</h3>
+	{{form(form)}}{% endblock %}
